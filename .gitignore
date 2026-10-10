@@ -1,0 +1,10 @@
+# PhysioNet credentialed data (MIMIC-IV, eICU-CRD) and anything derived from it must never be committed (DUA).
+data/
+results/
+logs/
+*.npz
+*.parquet
+*.pt
+*.csv
+*.csv.gz
+__pycache__/

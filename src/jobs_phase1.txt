@@ -1,0 +1,27 @@
+# Phase 1 (seed 2): A안 + 원 PatchFusion + 비교모델 + C안
+hpf_s2 --model hpf --seed 2
+pf_y24_s2 --model pf --endpoint y24 --seed 2
+hpf_noq_s2 --model hpf_noq --seed 2
+mtpf_s2 --model mtpf --seed 2
+pf_y48_s2 --model pf --endpoint y48 --seed 2
+pf_y168_s2 --model pf --endpoint y168 --seed 2
+pf_yhosp_s2 --model pf --endpoint yhosp --seed 2
+hpf_carry_s2 --model hpf --seed 2 --cfg '{"enc":{"state":"carry"}}'
+pf_carry_y24_s2 --model pf --endpoint y24 --seed 2 --cfg '{"enc":{"state":"carry"}}'
+hpf_noglobal_s2 --model hpf --seed 2 --cfg '{"enc":{"use_global":false}}'
+lstm_y24_s2 --model lstm --endpoint y24 --seed 2
+transformer_y24_s2 --model transformer --endpoint y24 --seed 2
+patchtst_y24_s2 --model patchtst --endpoint y24 --seed 2
+grud_y24_s2 --model grud --endpoint y24 --seed 2
+lstm_y48_s2 --model lstm --endpoint y48 --seed 2
+transformer_y48_s2 --model transformer --endpoint y48 --seed 2
+patchtst_y48_s2 --model patchtst --endpoint y48 --seed 2
+grud_y48_s2 --model grud --endpoint y48 --seed 2
+lstm_y168_s2 --model lstm --endpoint y168 --seed 2
+transformer_y168_s2 --model transformer --endpoint y168 --seed 2
+patchtst_y168_s2 --model patchtst --endpoint y168 --seed 2
+grud_y168_s2 --model grud --endpoint y168 --seed 2
+lstm_yhosp_s2 --model lstm --endpoint yhosp --seed 2
+transformer_yhosp_s2 --model transformer --endpoint yhosp --seed 2
+patchtst_yhosp_s2 --model patchtst --endpoint yhosp --seed 2
+grud_yhosp_s2 --model grud --endpoint yhosp --seed 2
