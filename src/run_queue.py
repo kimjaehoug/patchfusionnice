@@ -8,6 +8,7 @@ import json
 import os
 import shlex
 import subprocess
+import sys
 import time
 
 ROOT = os.environ.get("PF_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -46,7 +47,7 @@ def main():
         while todo and len(running) < a.parallel:
             tag, args = todo.pop(0)
             out = open(f"{ROOT}/logs/train/{tag}.stdout", "w")
-            cmd = ["python3", "train.py", "--tag", tag] + shlex.split(args)
+            cmd = [sys.executable, "train.py", "--tag", tag] + shlex.split(args)
             p = subprocess.Popen(cmd, cwd=f"{ROOT}/src", env=env, stdout=out, stderr=subprocess.STDOUT)
             running[tag] = (p, time.time())
             qlog(f"START {tag} pid={p.pid}: {' '.join(cmd[2:])}")
