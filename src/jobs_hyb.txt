@@ -1,0 +1,4 @@
+# data-driven granularity: lab counterfactuals per patch (local regime), capture counterfactuals per sequence (global regime)
+hyb_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_aug":0.5,"cfo_aug_reg":["lab"],"cfo_gaug":0.33,"cfo_gaug_reg":["cap"]}}'
+hyb_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_aug":0.5,"cfo_aug_reg":["lab"],"cfo_gaug":0.33,"cfo_gaug_reg":["cap"]}}'
+hyb_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_aug":0.5,"cfo_aug_reg":["lab"],"cfo_gaug":0.33,"cfo_gaug_reg":["cap"]}}'

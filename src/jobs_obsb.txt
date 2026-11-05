@@ -1,0 +1,13 @@
+# OPB-PatchFusion (C1 reset + C2 bounded indicator evidence + C3 absence-neutral critical excursions) and one-out ablations
+obsb_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"obsb":true}}'
+obsb_noC2_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"obsb":true,"obsb_ind_in_enc":true}}'
+obsb_noC3_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"obsb":true,"obsb_exc":false}}'
+obsb_noC1_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"obsb":true,"state":"carry"}}'
+obsb_s3 --model hpf_noq --seed 3 --cfg '{"enc":{"obsb":true}}'
+obsb_noC2_s3 --model hpf_noq --seed 3 --cfg '{"enc":{"obsb":true,"obsb_ind_in_enc":true}}'
+obsb_noC3_s3 --model hpf_noq --seed 3 --cfg '{"enc":{"obsb":true,"obsb_exc":false}}'
+obsb_noC1_s3 --model hpf_noq --seed 3 --cfg '{"enc":{"obsb":true,"state":"carry"}}'
+obsb_s4 --model hpf_noq --seed 4 --cfg '{"enc":{"obsb":true}}'
+obsb_noC2_s4 --model hpf_noq --seed 4 --cfg '{"enc":{"obsb":true,"obsb_ind_in_enc":true}}'
+obsb_noC3_s4 --model hpf_noq --seed 4 --cfg '{"enc":{"obsb":true,"obsb_exc":false}}'
+obsb_noC1_s4 --model hpf_noq --seed 4 --cfg '{"enc":{"obsb":true,"state":"carry"}}'

@@ -1,0 +1,6 @@
+# TA v2 replication (seeds 3,4), matched availability baseline, and init-robustness of learned thresholds
+hpf_noq_ta2_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"ta_lr_mult":10,"enc":{"ta_cuts":4,"ta_keep":true}}'
+hpf_noq_ta2_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"ta_lr_mult":10,"enc":{"ta_cuts":4,"ta_keep":true}}'
+hpf_noq_av_s3 --model hpf_noq --seed 3 --cfg '{"avail":true}'
+hpf_noq_av_s4 --model hpf_noq --seed 4 --cfg '{"avail":true}'
+hpf_noq_ta2q_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"ta_lr_mult":10,"enc":{"ta_cuts":4,"ta_keep":true,"ta_q":[0.2,0.4,0.6,0.8]}}'

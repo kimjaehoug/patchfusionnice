@@ -1,0 +1,10 @@
+# Observation-regime-aware PatchFusion: regime simulation, +site descriptor context token, +TA v2; seeds 2-4
+hpf_noq_rg_s2 --model hpf_noq --seed 2 --cfg '{"regime":"sim"}'
+hpf_noq_rgd_s2 --model hpf_noq --seed 2 --cfg '{"regime":"sim+desc"}'
+ta2_rgd_s2 --model hpf_noq --seed 2 --cfg '{"regime":"sim+desc","ta_lr_mult":10,"enc":{"ta_cuts":4,"ta_keep":true}}'
+hpf_noq_rg_s3 --model hpf_noq --seed 3 --cfg '{"regime":"sim"}'
+hpf_noq_rgd_s3 --model hpf_noq --seed 3 --cfg '{"regime":"sim+desc"}'
+ta2_rgd_s3 --model hpf_noq --seed 3 --cfg '{"regime":"sim+desc","ta_lr_mult":10,"enc":{"ta_cuts":4,"ta_keep":true}}'
+hpf_noq_rg_s4 --model hpf_noq --seed 4 --cfg '{"regime":"sim"}'
+hpf_noq_rgd_s4 --model hpf_noq --seed 4 --cfg '{"regime":"sim+desc"}'
+ta2_rgd_s4 --model hpf_noq --seed 4 --cfg '{"regime":"sim+desc","ta_lr_mult":10,"enc":{"ta_cuts":4,"ta_keep":true}}'

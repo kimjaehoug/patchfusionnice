@@ -12,6 +12,8 @@ import time
 import duckdb
 
 M = os.environ.get("MIMIC_DIR", "/A.I_DATA/jbnu/jaehong/중증도/mimic-iv-3.1")   # PhysioNet MIMIC-IV 3.1 root
+H = int(os.environ.get("PF_HOURS", "12"))          # extraction window [0, H) hours from ICU admission
+SUF = os.environ.get("PF_SUFFIX", "")              # output file suffix (e.g. "72" for the dynamic-landmark data)
 OUT = os.path.join(os.environ.get("PF_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "data")
 os.makedirs(OUT, exist_ok=True)
 
@@ -70,7 +72,7 @@ FROM read_csv('{M}/icu/chartevents.csv.gz', header=true, all_varchar=false,
               types={{'value':'VARCHAR','valueuom':'VARCHAR','warning':'VARCHAR'}}) c
 JOIN chartmap m ON m.itemid = c.itemid
 JOIN cohort k ON k.stay_id = c.stay_id
-WHERE c.charttime::TIMESTAMP >= k.intime AND c.charttime::TIMESTAMP < k.intime + INTERVAL 12 HOUR
+WHERE c.charttime::TIMESTAMP >= k.intime AND c.charttime::TIMESTAMP < k.intime + INTERVAL {H} HOUR
 """)
 log(f"chartevents rows kept: {con.sql('select count(*) from ce').fetchone()[0]}")
 
@@ -90,7 +92,7 @@ FROM read_csv('{M}/hosp/labevents.csv.gz', header=true,
 JOIN labmap m ON m.itemid = l.itemid
 JOIN cohort k ON k.hadm_id = l.hadm_id
 WHERE l.valuenum IS NOT NULL
-  AND l.charttime::TIMESTAMP >= k.intime AND l.charttime::TIMESTAMP < k.intime + INTERVAL 12 HOUR
+  AND l.charttime::TIMESTAMP >= k.intime AND l.charttime::TIMESTAMP < k.intime + INTERVAL {H} HOUR
 """)
 log(f"labevents rows kept: {con.sql('select count(*) from le').fetchone()[0]}")
 
@@ -103,7 +105,7 @@ SELECT k.stay_id, e.itemid, e.starttime::TIMESTAMP st, e.endtime::TIMESTAMP et,
 FROM read_csv_auto('{M}/icu/inputevents.csv.gz') e
 JOIN cohort k ON k.stay_id = e.stay_id
 WHERE e.itemid IN (221906, 222315)
-  AND e.endtime::TIMESTAMP > k.intime AND e.starttime::TIMESTAMP < k.intime + INTERVAL 12 HOUR
+  AND e.endtime::TIMESTAMP > k.intime AND e.starttime::TIMESTAMP < k.intime + INTERVAL {H} HOUR
 """)
 # ---------------------------------------------------------------- procedureevents (invasive vent)
 con.execute(f"""
@@ -112,7 +114,7 @@ SELECT k.stay_id, e.starttime::TIMESTAMP st, e.endtime::TIMESTAMP et, k.intime
 FROM read_csv_auto('{M}/icu/procedureevents.csv.gz') e
 JOIN cohort k ON k.stay_id = e.stay_id
 WHERE e.itemid = 225792
-  AND e.endtime::TIMESTAMP > k.intime AND e.starttime::TIMESTAMP < k.intime + INTERVAL 12 HOUR
+  AND e.endtime::TIMESTAMP > k.intime AND e.starttime::TIMESTAMP < k.intime + INTERVAL {H} HOUR
 """)
 # ---------------------------------------------------------------- outputevents (urine)
 UO = (226559, 226560, 226561, 226584, 226563, 226564, 226565, 226567, 226557, 226558, 227489)
@@ -122,12 +124,12 @@ SELECT k.stay_id, e.charttime::TIMESTAMP charttime, e.value::DOUBLE AS value, k.
 FROM read_csv_auto('{M}/icu/outputevents.csv.gz') e
 JOIN cohort k ON k.stay_id = e.stay_id
 WHERE e.itemid IN {UO}
-  AND e.charttime::TIMESTAMP >= k.intime AND e.charttime::TIMESTAMP < k.intime + INTERVAL 12 HOUR
+  AND e.charttime::TIMESTAMP >= k.intime AND e.charttime::TIMESTAMP < k.intime + INTERVAL {H} HOUR
 """)
 log("interval tables done")
 
 # ---------------------------------------------------------------- hourly long table
-con.execute("CREATE TABLE hours AS SELECT range AS hour FROM range(12)")
+con.execute(f"CREATE TABLE hours AS SELECT range AS hour FROM range({H})")
 con.execute("""
 CREATE TABLE long AS
 WITH c AS (
@@ -187,8 +189,8 @@ SELECT * FROM simple UNION ALL SELECT * FROM gcs UNION ALL
 SELECT DISTINCT * FROM (SELECT * FROM ventc UNION ALL SELECT * FROM ventp) UNION ALL
 SELECT * FROM lab UNION ALL SELECT * FROM ne UNION ALL SELECT * FROM vaso UNION ALL SELECT * FROM uo
 """)
-con.execute(f"COPY (SELECT * FROM long WHERE hour BETWEEN 0 AND 11 AND value IS NOT NULL) TO '{OUT}/mimic_long.parquet' (FORMAT parquet)")
+con.execute(f"COPY (SELECT * FROM long WHERE hour BETWEEN 0 AND {H - 1} AND value IS NOT NULL) TO '{OUT}/mimic_long{SUF}.parquet' (FORMAT parquet)")
 con.execute(f"""COPY (SELECT subject_id, hadm_id, stay_id, intime, outtime, age, gender, hospital_expire_flag,
-                 t_death_h, t_disch_h FROM cohort) TO '{OUT}/mimic_cohort.parquet' (FORMAT parquet)""")
+                 t_death_h, t_disch_h FROM cohort) TO '{OUT}/mimic_cohort{SUF}.parquet' (FORMAT parquet)""")
 log(con.sql("SELECT var, count(*) n, count(DISTINCT stay_id) stays FROM long GROUP BY var ORDER BY var").fetchall())
 log("done")

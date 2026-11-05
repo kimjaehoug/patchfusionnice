@@ -1,0 +1,3 @@
+# value-availability flag (never-measured vs carried) in PatchFusion, seed 2
+hpf_noq_av_s2 --model hpf_noq --seed 2 --cfg '{"avail":true}'
+hpf_noq_av_ple_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"ple_bins":16}}'

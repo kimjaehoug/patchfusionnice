@@ -1,0 +1,4 @@
+# Landmark-anchored nested patching (LAP) + ablations, seed 2
+lap_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"windows":[[9,12],[6,12],[0,12]]},"concat":true}'
+lap_mean_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"windows":[[9,12],[6,12],[0,12]]}}'
+hpf_cat_s2 --model hpf_noq --seed 2 --cfg '{"concat":true}'

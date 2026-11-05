@@ -1,0 +1,2 @@
+# TA v2: keep raw values + states, cut points without weight decay and 10x lr, seed 2
+hpf_noq_ta2_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"ta_lr_mult":10,"enc":{"ta_cuts":4,"ta_keep":true}}'

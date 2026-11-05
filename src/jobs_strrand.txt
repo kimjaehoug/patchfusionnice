@@ -1,0 +1,4 @@
+# C1 falsification: random (observation-process-agnostic) 3-stream split, same sizes 6/10/6, seeds 2-4
+strrand_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"streams":[[1,2,5,12,19,21],[0,6,9,10,11,13,16,17,18,20],[3,4,7,8,14,15]]}}'
+strrand_s3 --model hpf_noq --seed 3 --cfg '{"enc":{"streams":[[1,2,5,12,19,21],[0,6,9,10,11,13,16,17,18,20],[3,4,7,8,14,15]]}}'
+strrand_s4 --model hpf_noq --seed 4 --cfg '{"enc":{"streams":[[1,2,5,12,19,21],[0,6,9,10,11,13,16,17,18,20],[3,4,7,8,14,15]]}}'

@@ -8,6 +8,8 @@ import time
 import duckdb
 
 E = os.environ.get("EICU_DIR", "/A.I_DATA/jbnu/jaehong/중증도/eicu-collaborative-research-database-2.0")
+H = int(os.environ.get("PF_HOURS", "12"))          # extraction window [0, H) hours from unit admission
+SUF = os.environ.get("PF_SUFFIX", "")
 OUT = os.path.join(os.environ.get("PF_ROOT", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "data")
 
 con = duckdb.connect()
@@ -49,26 +51,26 @@ FROM s3 WHERE hospitaldischargestatus IN ('Alive', 'Expired') AND hospitaldischa
 n4 = con.sql("select count(*) from cohort").fetchone()[0]
 log(f"cohort funnel: all={n0} age={n1} first={n2} alive_in_icu_h12={n3} known_status={n4}")
 
-W = "o >= 0 AND o < 720"   # minutes window [0, 12h)
+W = f"o >= 0 AND o < {H * 60}"   # minutes window [0, 12h)
 
 con.execute(f"""
 CREATE TABLE vp AS
 SELECT v.patientunitstayid stay_id, v.observationoffset o, heartrate, respiration, sao2, temperature,
        systemicsystolic, systemicdiastolic
 FROM {rd('vitalPeriodic')} v SEMI JOIN cohort c ON c.stay_id = v.patientunitstayid
-WHERE v.observationoffset >= 0 AND v.observationoffset < 720""")
+WHERE v.observationoffset >= 0 AND v.observationoffset < {H * 60}""")
 log("vitalPeriodic done")
 con.execute(f"""
 CREATE TABLE va AS
 SELECT v.patientunitstayid stay_id, v.observationoffset o, noninvasivesystolic, noninvasivediastolic
 FROM {rd('vitalAperiodic')} v SEMI JOIN cohort c ON c.stay_id = v.patientunitstayid
-WHERE v.observationoffset >= 0 AND v.observationoffset < 720""")
+WHERE v.observationoffset >= 0 AND v.observationoffset < {H * 60}""")
 con.execute(f"""
 CREATE TABLE nc AS
 SELECT n.patientunitstayid stay_id, n.nursingchartoffset o, n.nursingchartcelltypevalname nm,
        try_cast(n.nursingchartvalue AS DOUBLE) val
 FROM {rd('nurseCharting')} n SEMI JOIN cohort c ON c.stay_id = n.patientunitstayid
-WHERE n.nursingchartoffset >= 0 AND n.nursingchartoffset < 720
+WHERE n.nursingchartoffset >= 0 AND n.nursingchartoffset < {H * 60}
   AND n.nursingchartcelltypevalname IN ('GCS Total', 'Temperature (C)', 'Heart Rate', 'Respiratory Rate',
                                         'O2 Saturation', 'Non-Invasive BP Systolic', 'Non-Invasive BP Diastolic',
                                         'Invasive BP Systolic', 'Invasive BP Diastolic')""")
@@ -81,7 +83,7 @@ SELECT l.patientunitstayid stay_id, l.labresultoffset o,
             WHEN 'pH' THEN 'ph' WHEN 'Base Excess' THEN 'be' WHEN 'anion gap' THEN 'ag' WHEN 'FiO2' THEN 'fio2' END var,
        l.labresult::DOUBLE val
 FROM {rd('lab')} l SEMI JOIN cohort c ON c.stay_id = l.patientunitstayid
-WHERE l.labresultoffset >= 0 AND l.labresultoffset < 720 AND l.labresult IS NOT NULL
+WHERE l.labresultoffset >= 0 AND l.labresultoffset < {H * 60} AND l.labresult IS NOT NULL
   AND l.labname IN ('BUN','lactate','WBC x 1000','Hgb','sodium','potassium','chloride','pH','Base Excess','anion gap','FiO2')""")
 log("lab done")
 con.execute(f"""
@@ -89,7 +91,7 @@ CREATE TABLE rc AS
 SELECT r.patientunitstayid stay_id, r.respchartoffset o, r.respchartvaluelabel lbl,
        try_cast(replace(r.respchartvalue, '%', '') AS DOUBLE) val
 FROM {rd('respiratoryCharting')} r SEMI JOIN cohort c ON c.stay_id = r.patientunitstayid
-WHERE r.respchartoffset >= 0 AND r.respchartoffset < 720
+WHERE r.respchartoffset >= 0 AND r.respchartoffset < {H * 60}
   AND r.respchartvaluelabel IN ('FiO2', 'FIO2 (%)', 'Set Fraction of Inspired Oxygen (FIO2)', 'Vent Rate',
                                 'Mechanical Ventilator Mode', 'Ventilator Support Mode',
                                 'Adult Con Pt/Vent MinuteVentil', 'Adult Con Pt/Vent InspiratorTV')""")
@@ -97,20 +99,20 @@ con.execute(f"""
 CREATE TABLE tr AS
 SELECT t.patientunitstayid stay_id, t.treatmentoffset o
 FROM {rd('treatment')} t SEMI JOIN cohort c ON c.stay_id = t.patientunitstayid
-WHERE t.treatmentoffset >= 0 AND t.treatmentoffset < 720
+WHERE t.treatmentoffset >= 0 AND t.treatmentoffset < {H * 60}
   AND lower(t.treatmentstring) LIKE '%mechanical ventilation%' AND lower(t.treatmentstring) NOT LIKE '%non-invasive%'""")
 con.execute(f"""
 CREATE TABLE inf AS
 SELECT i.patientunitstayid stay_id, i.infusionoffset o, lower(i.drugname) dn,
        try_cast(i.drugrate AS DOUBLE) rate, try_cast(i.patientweight AS DOUBLE) pw
 FROM {rd('infusionDrug')} i SEMI JOIN cohort c ON c.stay_id = i.patientunitstayid
-WHERE i.infusionoffset >= 0 AND i.infusionoffset < 720
+WHERE i.infusionoffset >= 0 AND i.infusionoffset < {H * 60}
   AND (lower(i.drugname) LIKE '%norepinephrine%' OR lower(i.drugname) LIKE '%levophed%' OR lower(i.drugname) LIKE '%vasopressin%')""")
 con.execute(f"""
 CREATE TABLE io AS
 SELECT x.patientunitstayid stay_id, x.intakeoutputoffset o, x.cellvaluenumeric::DOUBLE val
 FROM {rd('intakeOutput')} x SEMI JOIN cohort c ON c.stay_id = x.patientunitstayid
-WHERE x.intakeoutputoffset >= 0 AND x.intakeoutputoffset < 720
+WHERE x.intakeoutputoffset >= 0 AND x.intakeoutputoffset < {H * 60}
   AND lower(x.cellpath) LIKE '%output%' AND lower(x.celllabel) LIKE '%urine%'
   AND lower(x.celllabel) NOT SIMILAR TO '.*(count|occurrence|stool|incontinen).*'""")
 log("other tables done")
@@ -160,8 +162,8 @@ uo AS (
 )
 SELECT * FROM v2 UNION ALL SELECT * FROM vent UNION ALL SELECT * FROM ne UNION ALL SELECT * FROM vaso UNION ALL SELECT * FROM uo
 """)
-con.execute(f"COPY (SELECT * FROM long WHERE hour BETWEEN 0 AND 11 AND value IS NOT NULL) TO '{OUT}/eicu_long.parquet' (FORMAT parquet)")
+con.execute(f"COPY (SELECT * FROM long WHERE hour BETWEEN 0 AND {H - 1} AND value IS NOT NULL) TO '{OUT}/eicu_long{SUF}.parquet' (FORMAT parquet)")
 con.execute(f"""COPY (SELECT stay_id, uniquepid AS subject_id, hospitalid, age, gender, hospital_expire_flag,
-                 t_death_h, t_disch_h FROM cohort) TO '{OUT}/eicu_cohort.parquet' (FORMAT parquet)""")
+                 t_death_h, t_disch_h FROM cohort) TO '{OUT}/eicu_cohort{SUF}.parquet' (FORMAT parquet)""")
 log(con.sql("SELECT var, count(*) n, count(DISTINCT stay_id) stays FROM long GROUP BY var ORDER BY var").fetchall())
 log("done")

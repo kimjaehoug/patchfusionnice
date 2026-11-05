@@ -1,0 +1,9 @@
+# FINAL formal-lite (2 folds + frozen model), 48-h dynamic: proposed (reset 6 h + 3-h tokens, three scales, two-view, stay embedding), no-reset ablation, backbone
+dprop_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dpropnr_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":48}}'
+dprop_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dpropnr_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":48}}'
+dprop_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dpropnr_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":48}}'
+dbase_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6}'
+dbase_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6}'

@@ -1,0 +1,2 @@
+RE_s2 --model hpf_noq --seed 2 --final_epochs 7 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256}}'
+RE_s4 --model hpf_noq --seed 4 --final_epochs 10 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256}}'

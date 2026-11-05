@@ -1,0 +1,3 @@
+# Numerical (piecewise-linear) encoding test: does the GBDT gap close? seed 2
+hpf_noq_ple_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"ple_bins":16}}'
+pf_ple_y24_s2 --model pf --endpoint y24 --seed 2 --cfg '{"enc":{"ple_bins":16}}'

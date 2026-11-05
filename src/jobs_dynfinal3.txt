@@ -1,0 +1,7 @@
+# 48-h dynamic, formal-lite (2 folds + frozen model), three observation regimes: original PatchFusion patches vs hard reset + 3-h tokens
+dorig3_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true}}'
+dfin3_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dorig3_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true}}'
+dfin3_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dorig3_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true}}'
+dfin3_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'

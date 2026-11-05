@@ -1,0 +1,4 @@
+# dynamic landmarks screening (seed 2, 2 folds, bs=1024, patience 6): baseline / contamination-biased attention / carry falsification
+dyn_av_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6}'
+dyn_ca4_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cattn":4.0}}'
+dyn_ca4carry_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cattn":4.0,"state":"carry"}}'

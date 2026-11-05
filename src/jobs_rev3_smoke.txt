@@ -1,0 +1,2 @@
+SMK_thinH --model hpf_noq --seed 2 --final_epochs 1 --sub_frac 0.05 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256},"profile":{"target":"hallym_dyn:sites","simple":true}}'
+SMK_propM --model hpf_noq --seed 2 --final_epochs 1 --sub_frac 0.05 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256},"profile":{"target":"eicu_dyn:mid:sites","scheme":"mix","fix_rand_vitals":true,"parts":["sel","cad","vitcad","doccad"]}}'

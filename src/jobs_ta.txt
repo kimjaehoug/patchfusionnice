@@ -1,0 +1,2 @@
+# learned temporal abstraction inside PatchFusion (needs availability channels), seed 2
+hpf_noq_ta_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"ta_cuts":4}}'

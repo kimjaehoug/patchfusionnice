@@ -1,0 +1,7 @@
+# Hallym-target variants: mixed (half target / half random profiles) and jittered target profile, patch mode
+pmixH_s2 --model hpf_noq --seed 2 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"patch","scheme":"mix"}}'
+pjitH_s2 --model hpf_noq --seed 2 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"patch","scheme":"jitter"}}'
+pmixH_s3 --model hpf_noq --seed 3 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"patch","scheme":"mix"}}'
+pjitH_s3 --model hpf_noq --seed 3 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"patch","scheme":"jitter"}}'
+pmixH_s4 --model hpf_noq --seed 4 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"patch","scheme":"mix"}}'
+pjitH_s4 --model hpf_noq --seed 4 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"patch","scheme":"jitter"}}'

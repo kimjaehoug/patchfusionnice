@@ -1,0 +1,12 @@
+# mixed profile-matched imagination: patch vs seq for Hallym and eICU-low targets; complete base/generic seed 4
+pmixHs_s2 --model hpf_noq --seed 2 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"seq","scheme":"mix"}}'
+pmixE_s2 --model hpf_noq --seed 2 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"eicu_dyn:low","mode":"patch","scheme":"mix"}}'
+pmixEs_s2 --model hpf_noq --seed 2 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"eicu_dyn:low","mode":"seq","scheme":"mix"}}'
+pmixHs_s3 --model hpf_noq --seed 3 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"seq","scheme":"mix"}}'
+pmixE_s3 --model hpf_noq --seed 3 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"eicu_dyn:low","mode":"patch","scheme":"mix"}}'
+pmixEs_s3 --model hpf_noq --seed 3 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"eicu_dyn:low","mode":"seq","scheme":"mix"}}'
+pmixHs_s4 --model hpf_noq --seed 4 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"hallym_dyn","mode":"seq","scheme":"mix"}}'
+pmixE_s4 --model hpf_noq --seed 4 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"eicu_dyn:low","mode":"patch","scheme":"mix"}}'
+pmixEs_s4 --model hpf_noq --seed 4 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"},"profile":{"target":"eicu_dyn:low","mode":"seq","scheme":"mix"}}'
+pbase_s4 --model hpf_noq --seed 4 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard"}}'
+pgen_s4 --model hpf_noq --seed 4 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard","cfo_gaug":0.67,"cfo_gaug_reg":["lab","cap","src"],"twoview":true}}'

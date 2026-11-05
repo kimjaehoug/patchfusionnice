@@ -1,0 +1,6 @@
+W_base_s2 --model hpf_noq --seed 2 --n_folds_run 1 --max_epochs 40 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256}}'
+W_noreset_s2 --model hpf_noq --seed 2 --n_folds_run 1 --max_epochs 40 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256,"dyn_seg":48}}'
+W_base_s3 --model hpf_noq --seed 3 --n_folds_run 1 --max_epochs 40 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256}}'
+W_noreset_s3 --model hpf_noq --seed 3 --n_folds_run 1 --max_epochs 40 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256,"dyn_seg":48}}'
+W_base_s4 --model hpf_noq --seed 4 --n_folds_run 1 --max_epochs 40 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256}}'
+W_noreset_s4 --model hpf_noq --seed 4 --n_folds_run 1 --max_epochs 40 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256,"dyn_seg":48}}'

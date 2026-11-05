@@ -1,0 +1,7 @@
+# controls for patch-structured in-model augmentation: same counterfactual rules on the whole sequence (reset / carry)
+gaug_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67}}'
+gaug_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67}}'
+gaug_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67}}'
+gaugcarry_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"state":"carry"}}'
+gaugcarry_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"state":"carry"}}'
+gaugcarry_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"state":"carry"}}'

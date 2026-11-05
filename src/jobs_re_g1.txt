@@ -1,0 +1,1 @@
+RE_s3 --model hpf_noq --seed 3 --final_epochs 11 --cfg '{"data":"_dyn","bs":1024,"avail":true,"patience":6,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"lstm_h":256}}'

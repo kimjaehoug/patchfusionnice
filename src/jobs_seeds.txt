@@ -1,0 +1,5 @@
+# seed replication: hpf_noq vs PLE (internal-up / external-down pattern check)
+hpf_noq_s3 --model hpf_noq --seed 3
+hpf_noq_ple_s3 --model hpf_noq --seed 3 --cfg '{"enc":{"ple_bins":16}}'
+hpf_noq_s4 --model hpf_noq --seed 4
+hpf_noq_ple_s4 --model hpf_noq --seed 4 --cfg '{"enc":{"ple_bins":16}}'

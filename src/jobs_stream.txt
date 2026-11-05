@@ -1,0 +1,7 @@
+# observation-process confinement (3 streams: monitor / selective labs / care+documentation), seeds 2-4, +/- regime training
+str_s2 --model hpf_noq --seed 2 --cfg '{"enc":{"streams":[[0,1,2,3,4,5],[6,7,8,9,10,11,12,13,14,15],[16,17,18,19,20,21]]}}'
+str_rgd_s2 --model hpf_noq --seed 2 --cfg '{"regime":"sim+desc","enc":{"streams":[[0,1,2,3,4,5],[6,7,8,9,10,11,12,13,14,15],[16,17,18,19,20,21]]}}'
+str_s3 --model hpf_noq --seed 3 --cfg '{"enc":{"streams":[[0,1,2,3,4,5],[6,7,8,9,10,11,12,13,14,15],[16,17,18,19,20,21]]}}'
+str_rgd_s3 --model hpf_noq --seed 3 --cfg '{"regime":"sim+desc","enc":{"streams":[[0,1,2,3,4,5],[6,7,8,9,10,11,12,13,14,15],[16,17,18,19,20,21]]}}'
+str_s4 --model hpf_noq --seed 4 --cfg '{"enc":{"streams":[[0,1,2,3,4,5],[6,7,8,9,10,11,12,13,14,15],[16,17,18,19,20,21]]}}'
+str_rgd_s4 --model hpf_noq --seed 4 --cfg '{"regime":"sim+desc","enc":{"streams":[[0,1,2,3,4,5],[6,7,8,9,10,11,12,13,14,15],[16,17,18,19,20,21]]}}'

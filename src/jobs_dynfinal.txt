@@ -1,0 +1,10 @@
+# 48-h dynamic landmarks, formal-lite (2 folds + frozen full-cohort model): final model (hard reset 6 h + 3-h tokens + cf obs + stay imagination + two-view) / same without reset / baseline
+dfin_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dnoreset_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":48}}'
+dbase_s2 --model hpf_noq --seed 2 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6}'
+dfin_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dnoreset_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":48}}'
+dbase_s3 --model hpf_noq --seed 3 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6}'
+dfin_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":6}}'
+dnoreset_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"twoview":true,"dynpatch":true,"dyn_mode":"hard","dyn_seg":48}}'
+dbase_s4 --model hpf_noq --seed 4 --n_folds_run 2 --cfg '{"data":"_dyn","avail":true,"bs":1024,"patience":6}'

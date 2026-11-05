@@ -1,0 +1,7 @@
+# imagination v2 (probabilistic head + EMA teacher, lambda 0.1) on top of whole-sequence counterfactual aug; falsification without patching (one 12-h patch)
+img2_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1}}'
+img2_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1}}'
+img2_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1}}'
+img2np_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"patch":12,"stride":12}}'
+img2np_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"patch":12,"stride":12}}'
+img2np_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"patch":12,"stride":12}}'

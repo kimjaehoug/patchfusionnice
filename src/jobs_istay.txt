@@ -1,0 +1,7 @@
+# stay-level full-observation embedding prediction (imag_stay) on whole-sequence counterfactual aug; patch vs no-patch (one 12-h patch)
+istay_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true}}'
+istaynp_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"patch":12,"stride":12}}'
+istay_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true}}'
+istaynp_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"patch":12,"stride":12}}'
+istay_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true}}'
+istaynp_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_gaug":0.67,"imag2":0.1,"imag_stay":true,"patch":12,"stride":12}}'

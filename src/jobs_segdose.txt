@@ -1,0 +1,4 @@
+ESEG12_s2 --model hpf_noq --seed 2 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"dyn_seg":12}}'
+ESEG24_s2 --model hpf_noq --seed 2 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"dyn_seg":24}}'
+ESEG12_s3 --model hpf_noq --seed 3 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"dyn_seg":12}}'
+ESEG24_s3 --model hpf_noq --seed 3 --final_epochs 10 --sub_frac 0.3 --cfg '{"data":"_dyn","bs":1024,"avail":true,"enc":{"dynpatch":true,"dyn_mode":"hard","clean":true,"dyn_seg":24}}'

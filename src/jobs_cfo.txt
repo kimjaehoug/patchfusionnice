@@ -1,0 +1,7 @@
+# counterfactual observation patch encoding (in-model, factual + lab/cap counterfactual tokens) vs augmentation-only control; hour-12, avail input
+cfo_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo":["lab","cap"]}}'
+cfoaug_s2 --model hpf_noq --seed 2 --cfg '{"avail":true,"enc":{"cfo_aug":0.67}}'
+cfo_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo":["lab","cap"]}}'
+cfoaug_s3 --model hpf_noq --seed 3 --cfg '{"avail":true,"enc":{"cfo_aug":0.67}}'
+cfo_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo":["lab","cap"]}}'
+cfoaug_s4 --model hpf_noq --seed 4 --cfg '{"avail":true,"enc":{"cfo_aug":0.67}}'
