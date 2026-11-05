@@ -8,3 +8,6 @@ logs/
 *.csv
 *.csv.gz
 __pycache__/
+
+# withdrawn manuscripts (kept locally only)
+paper/JAMIA_submission/
